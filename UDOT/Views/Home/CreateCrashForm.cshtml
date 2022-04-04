@@ -11,51 +11,67 @@
         @*<label name="CRASH_DATETIME" class="form-label">CRASH_DATETIME</label>
             <input type="text" class="form-control" name="CRASH_DATETIME">*@
 
-        <label for="meeting-time">Select date and time crash:</label>
-        <input type="datetime-local" id="CRASH_DATETIME-time"
+        <label for="meeting-time" class="form-label">Select date and time crash:</label>
+        <br />
+        <input type="datetime-local" id="CRASH_DATETIME-time" class="form-control"
                name="CRASH_DATETIME-time" value="2018-06-12T19:30"
                min="2018-06-07T00:00" max="2018-06-14T00:00">
     </div>
     <div class="mb-2">
-        <label name="ROUTE" class="form-label">ROUTE</label>
-        <input type="text" class="form-control" name="ROUTE">
+        <label name="ROUTE" class="form-label">Route No:</label>
+        <input type="number" class="form-control" name="ROUTE" min="0">
     </div>
     <div class="mb-2">
-        <label name="MILEPOINT" class="form-label">MILEPOINT</label>
-        <input type="text" class="form-control" name="MILEPOINT">
+        <label name="MILEPOINT" class="form-label">Milepoint:</label>
+        <input type="number" class="form-control" name="MILEPOINT">
     </div>
     <div class="mb-2">
-        <label name="LAT_UM_Y" class="form-label">LAT_UM_Y</label>
-        <input type="text" class="form-control" name="LAT_UM_Y">
+        <label name="LAT_UM_Y" class="form-label">Latitude:</label>
+        <input type="number" class="form-control" name="LAT_UM_Y">
     </div>
     <div class="mb-2">
-        <label name="LONG_UTM_X" class="form-label">LONG_UTM_X</label>
-        <input type="text" class="form-control" name="LONG_UTM_X">
+        <label name="LONG_UTM_X" class="form-label">Longitude:</label>
+        <input type="number" class="form-control" name="LONG_UTM_X">
     </div>
+
+
+    @*LOOP Main Road DROPDOWN?*@
     <div class="mb-2">
-        <label name="MAIN_ROAD_NAME" class="form-label">MAIN_ROAD_NAME</label>
+        <label name="MAIN_ROAD_NAME" class="form-label">Main Road:</label>
         <input type="text" class="form-control" name="MAIN_ROAD_NAME">
     </div>
 
-    @*MAKE CITY DROPDOWN*@
+    @*LOOP CITY DROPDOWN*@
     <div class="mb-2">
-        <label name="CITY" class="form-label">CITY</label>
-        <input type="text" class="form-control" name="CITY">
+        <label name="CITY" class="form-label">City:</label>
+        <select id="CITY" name="CITY" class="form-control">
+            <option value="Wendover">Wendover</option>
+            <option value="Outside City Limits">Outside City Limits</option>
+            <option value="Gunlock">Gunlock</option>
+            <option value="Millard">Millard</option>
+            <option value="Toole">Toole</option>
+
+        </select>
     </div>
 
-    @*MAKE COUNTY DROPDOWN*@
+    @*LOOP COUNTY DROPDOWN*@
     <div class="mb-2">
-        <label name="COUNTY_NAME" class="form-label">COUNTY_NAME</label>
-        <input type="text" class="form-control" name="COUNTY_NAME">
+        <label name="COUNTY_NAME" class="form-label">County:</label>
+        <select id="COUNTY_NAME" name="COUNTY_NAME" class="form-control">
+            <option value="Washington">Washington</option>
+            <option value="Iron">Iron</option>
+            <option value="Utah">Utah</option>
+            <option value="Millard">Millard</option>
+            <option value="Toole">Toole</option>
+
+        </select>
     </div>
 
-    @*MAKE CRASH_SEVERITY_ID DROPDOWN*@
-    <div class="mb-2">
-        <label name="CRASH_SEVERITY_ID" class="form-label">CRASH_SEVERITY_ID</label>
-        <input type="text" class="form-control" name="CRASH_SEVERITY_ID">
+    <br />
 
-        <label for="CRASH_SEVERITY_ID">CRASH SEVERITY (1=no injury, 2=possible injury, 3=suspected minor injury, 4=suspected serious injury, 5=fatal):</label>
-        <select id="CRASH_SEVERITY_ID" name="CRASH_SEVERITY_ID">
+    <div class="mb-2">
+        <label name="CRASH_SEVERITY_ID" class="form-label">Crash Severity (1=no injury, 2=possible injury, 3=suspected minor injury, 4=suspected serious injury, 5=fatal):</label>
+        <select id="CRASH_SEVERITY_ID" name="CRASH_SEVERITY_ID" class="form-control">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -65,28 +81,32 @@
         </select>
     </div>
 
+    <br /><hr /><br />
+
+    <h6>Check boxes that apply.</h6>
+
     <div class="mb-2">
-        <label name="WORK_ZONE_RELATED" class="form-label">WORK_ZONE_RELATED</label>
+        <label name="WORK_ZONE_RELATED" class="form-label">Work Zone Related</label>
         <input type="checkbox" id="WORK_ZONE_RELATED" name="WORK_ZONE_RELATED" value="WORK_ZONE_RELATED">
     </div>
     <div class="mb-2">
-        <label name="PEDESTRIAN_INVOLVED" class="form-label">PEDESTRIAN_INVOLVED</label>
+        <label name="PEDESTRIAN_INVOLVED" class="form-label">Pedestrian Involved</label>
         <input type="checkbox" id="PEDESTRIAN_INVOLVED" name="PEDESTRIAN_INVOLVED" value="PEDESTRIAN_INVOLVED">
     </div>
     <div class="mb-2">
-        <label name="BICYCLIST_INVOLVED" class="form-label">BICYCLIST_INVOLVED</label>
+        <label name="BICYCLIST_INVOLVED" class="form-label">Bicyclist Involved</label>
         <input type="checkbox" id="BICYCLIST_INVOLVED" name="BICYCLIST_INVOLVED" value="BICYCLIST_INVOLVED">
     </div>
     <div class="mb-2">
-        <label name="MOTORCYCLE_INVOLVED" class="form-label">MOTORCYCLE_INVOLVED</label>
+        <label name="MOTORCYCLE_INVOLVED" class="form-label">Motorcycle Involved</label>
         <input type="checkbox" id="MOTORCYCLE_INVOLVED" name="MOTORCYCLE_INVOLVED" value="MOTORCYCLE_INVOLVED">
     </div>
     <div class="mb-2">
-        <label name="IMPROPER_RESTRAINT" class="form-label">IMPROPER_RESTRAINT</label>
+        <label name="IMPROPER_RESTRAINT" class="form-label">Improper Restraint</label>
         <input type="checkbox" id="IMPROPER_RESTRAINT" name="IMPROPER_RESTRAINT" value="IMPROPER_RESTRAINT">
     </div>
     <div class="mb-2">
-        <label name="UNRESTRAINED" class="form-label">UNRESTRAINED</label>
+        <label name="UNRESTRAINED" class="form-label">Unrestrained</label>
         <input type="checkbox" id="UNRESTRAINED" name="UNRESTRAINED" value="UNRESTRAINED">
     </div>
     <div class="mb-2">
@@ -94,51 +114,51 @@
         <input type="checkbox" id="DUI" name="DUI" value="DUI">
     </div>
     <div class="mb-2">
-        <label name="INTERSECTION_RELATED" class="form-label">INTERSECTION_RELATED</label>
+        <label name="INTERSECTION_RELATED" class="form-label">Intersection Related</label>
         <input type="checkbox" id="INTERSECTION_RELATED" name="INTERSECTION_RELATED" value="INTERSECTION_RELATED">
     </div>
     <div class="mb-2">
-        <label name="WILD_ANIMAL_RELATED" class="form-label">WILD_ANIMAL_RELATED</label>
+        <label name="WILD_ANIMAL_RELATED" class="form-label">Wild Animal Related</label>
         <input type="checkbox" id="WILD_ANIMAL_RELATED" name="WILD_ANIMAL_RELATED" value="WILD_ANIMAL_RELATED">
     </div>
     <div class="mb-2">
-        <label name="DOMESTIC_ANIMAL_RELATED" class="form-label">DOMESTIC_ANIMAL_RELATED</label>
+        <label name="DOMESTIC_ANIMAL_RELATED" class="form-label">Domestic Animal Related</label>
         <input type="checkbox" id="DOMESTIC_ANIMAL_RELATED" name="DOMESTIC_ANIMAL_RELATED" value="DOMESTIC_ANIMAL_RELATED">
     </div>
     <div class="mb-2">
-        <label name="OVERTURN_ROLLOVER" class="form-label">OVERTURN_ROLLOVER</label>
+        <label name="OVERTURN_ROLLOVER" class="form-label">Overturn Rollover</label>
         <input type="checkbox" id="OVERTURN_ROLLOVER" name="OVERTURN_ROLLOVER" value="OVERTURN_ROLLOVER">
     </div>
     <div class="mb-2">
-        <label name="COMMERCIAL_MOTOR_VEH_INVOLVED" class="form-label">COMMERCIAL_MOTOR_VEH_INVOLVED</label>
+        <label name="COMMERCIAL_MOTOR_VEH_INVOLVED" class="form-label">Commercial Motor Vehicle Involved</label>
         <input type="checkbox" id="COMMERCIAL_MOTOR_VEH_INVOLVED" name="COMMERCIAL_MOTOR_VEH_INVOLVED" value="COMMERCIAL_MOTOR_VEH_INVOLVED">
     </div>
     <div class="mb-2">
-        <label name="TEENAGE_DRIVER_INVOLVED" class="form-label">TEENAGE_DRIVER_INVOLVED</label>
+        <label name="TEENAGE_DRIVER_INVOLVED" class="form-label">Teenage Driver Involved</label>
         <input type="checkbox" id="TEENAGE_DRIVER_INVOLVED" name="TEENAGE_DRIVER_INVOLVED" value="TEENAGE_DRIVER_INVOLVED">
     </div>
     <div class="mb-2">
-        <label name="OLDER_DRIVER_INVOLVED" class="form-label">OLDER_DRIVER_INVOLVED</label>
+        <label name="OLDER_DRIVER_INVOLVED" class="form-label">Older Driver Involved</label>
         <input type="checkbox" id="OLDER_DRIVER_INVOLVED" name="OLDER_DRIVER_INVOLVED" value="OLDER_DRIVER_INVOLVED">
     </div>
     <div class="mb-2">
-        <label name="NIGHT_DARK_CONDITION" class="form-label">NIGHT_DARK_CONDITION</label>
+        <label name="NIGHT_DARK_CONDITION" class="form-label">Night/Dark Condition</label>
         <input type="checkbox" id="NIGHT_DARK_CONDITION" name="NIGHT_DARK_CONDITION" value="NIGHT_DARK_CONDITION">
     </div>
     <div class="mb-2">
-        <label name="SINGLE_VEHICLE" class="form-label">SINGLE_VEHICLE</label>
+        <label name="SINGLE_VEHICLE" class="form-label">Single Vehicle</label>
         <input type="checkbox" id="SINGLE_VEHICLE" name="SINGLE_VEHICLE" value="SINGLE_VEHICLE">
     </div>
     <div class="mb-2">
-        <label name="DISTRACTED_DRIVING" class="form-label">DISTRACTED_DRIVING</label>
+        <label name="DISTRACTED_DRIVING" class="form-label">Distracted Driving</label>
         <input type="checkbox" id="DISTRACTED_DRIVING" name="DISTRACTED_DRIVING" value="DISTRACTED_DRIVING">
     </div>
     <div class="mb-2">
-        <label name="DROWSY_DRIVING" class="form-label">DROWSY_DRIVING</label>
+        <label name="DROWSY_DRIVING" class="form-label">Drowsy Driving</label>
         <input type="checkbox" id="DROWSY_DRIVING" name="DROWSY_DRIVING" value="DROWSY_DRIVING">
     </div>
     <div class="mb-2">
-        <label name="ROADWAY_DEPARTURE" class="form-label">ROADWAY_DEPARTURE</label>
+        <label name="ROADWAY_DEPARTURE" class="form-label">Roadway Departure</label>
         <input type="checkbox" id="ROADWAY_DEPARTURE" name="ROADWAY_DEPARTURE" value="ROADWAY_DEPARTURE">
     </div>
 
