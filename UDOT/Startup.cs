@@ -70,6 +70,8 @@ namespace UDOT
                 //endpoints.MapControllerRoute(
                 //    name: "default",
                 //    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                //endpoints.MapControllerRoute("/admin/{*catchall}", "/Admin/Index");
             });
 
             IdentitySeedData.EnsurePopulated(app);

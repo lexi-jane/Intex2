@@ -2,6 +2,9 @@
     ViewData["Title"] = "Home Page";
 }
 
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
 @model List<Crash>
 
 <div class="row m-1 p-1">
@@ -21,6 +24,7 @@
         <div>
             <a href="/Home/CreateCrashForm" class="btn btn-success">Add Crash</a>
         </div>
+
         <table class="table table-sm table-striped table-bordered table-hover">
             <thead>
                 <tr>

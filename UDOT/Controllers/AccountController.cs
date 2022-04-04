@@ -20,9 +20,9 @@ namespace UDOT.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login(string returnUrl)
+        public IActionResult Login()
         {
-            return View(new LoginModel { ReturnUrl = returnUrl });
+            return View(new LoginModel());
         }
 
         [HttpPost]
@@ -38,21 +38,21 @@ namespace UDOT.Controllers
 
                     if ((await signInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
                     {
-                        return Redirect(loginModel?.ReturnUrl ?? "/Admin");
+                        return Redirect("/Home/CrashDetailsList");
                     }
                 }
             }
-            
+
             ModelState.AddModelError("", "invalid name or password");
             return View(loginModel);
         }
 
-        public async Task<RedirectResult> Logout (string returnUrl = "/")
+        public async Task<RedirectResult> Logout(string returnUrl = "/")
         {
             await signInManager.SignOutAsync();
 
             return Redirect(returnUrl);
         }
-        
+
     }
 }
