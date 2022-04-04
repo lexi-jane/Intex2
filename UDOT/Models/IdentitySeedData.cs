@@ -11,8 +11,8 @@ namespace UDOT.Models
 {
     public static class IdentitySeedData
     {
-        private const string adminUser = "Admin";
-        private const string adminPassword = "Password123456!";
+        private const string adminUser = "group37";
+        private const string adminPassword = "SecurePasswordFor37!";
 
         public static async void EnsurePopulated(IApplicationBuilder app)
         {
