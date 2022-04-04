@@ -23,16 +23,44 @@ namespace UDOT.Controllers
             return View();
         }
 
+
+        //------------------ READ LIST ------------------//
+
         public IActionResult CrashDetailsList()
         {
             return View();
         }
 
 
+
         //------------------ ADD ------------------//
+        [HttpGet]
         public IActionResult CreateCrashForm()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateCrash([FromForm] Crash crash)
+        {
+            return RedirectToAction("CrashDetailsList");
+        }
+
+
+
+        //------------------ EDIT(UPDATE) ------------------//
+        [HttpGet]
+        public IActionResult UpdateCrashForm()
+        {
+            //ViewBag.Teams = _context.Teams.ToList();
+            //Crash c = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCrash([FromForm] Crash crash)
+        {
+            return RedirectToAction("CrashDetailsList");
         }
 
 
