@@ -23,6 +23,18 @@ namespace UDOT.Controllers
             return View();
         }
 
+        public IActionResult CrashDetailsList()
+        {
+            return View();
+        }
+
+
+        //------------------ ADD ------------------//
+        public IActionResult CreateCrashForm()
+        {
+            return View();
+        }
+
 
     }
 }
