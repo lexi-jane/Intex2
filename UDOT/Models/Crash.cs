@@ -5,7 +5,7 @@ namespace UDOT.Models
     {
         public int CRASH_ID { get; set; }
         public DateTime Crash_Datetime { get; set; }
-        public string Route { get; set }
+        public string Route { get; set; }
         public float Milepoint { get; set;  }
         public float Lat_Utm_Y { get; set; }
         public float Long_Utm_X { get; set; }
