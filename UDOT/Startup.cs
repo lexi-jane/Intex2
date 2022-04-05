@@ -33,6 +33,8 @@ namespace UDOT
                 options.UseMySql(Configuration["ConnectionStrings:CrashDbConnection"]);
             });
 
+            services.AddScoped<ICrashRepository, EFCrashRepository>();
+
             services.AddDbContext<AppIdentityDbContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionStrings:IdentityConnection"]);

@@ -30,6 +30,7 @@ namespace UDOT.Controllers
 
         //------------------ READ LIST ------------------//
 
+        
         public IActionResult CrashDetailsList()
         {
             return View();
