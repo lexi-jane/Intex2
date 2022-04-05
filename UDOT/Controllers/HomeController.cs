@@ -56,6 +56,8 @@ namespace UDOT.Controllers
         [HttpPost]
         public IActionResult CreateCrash([FromForm] Crash crash)
         {
+            int newCrashID = _context.Crashes.OrderBy(x => x.CRASH_ID).Last().CRASH_ID;
+            crash.CRASH_ID = newCrashID + 1;
             _context.Add(crash);
             _context.SaveChanges();
             return RedirectToAction("CrashDetailsList");
@@ -65,7 +67,7 @@ namespace UDOT.Controllers
         [Authorize]
         [HttpGet]
         [Route("/Home/UpdateCrashForm/{id}")]
-        public IActionResult UpdateCrashForm(string id)
+        public IActionResult UpdateCrashForm(int id)
         {
             ViewBag.Crashes = _context.Crashes.ToList();
             Crash c = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
@@ -83,7 +85,7 @@ namespace UDOT.Controllers
         //---------------- Delete -------------------------//
         [Authorize]
         [Route("/Home/DeleteCrash/{id}")]
-        public IActionResult DeleteCrash(string id)
+        public IActionResult DeleteCrash(int id)
         {
             Crash c = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
             _context.Crashes.Remove(c);
