@@ -22,15 +22,17 @@ namespace UDOT.Controllers
             _context = context;
         }
 
+
+        //------------------ Landing Page ------------------//
         public IActionResult Index()
         {
             return View();
         }
 
 
-        //------------------ READ LIST ------------------//
 
-        
+        //------------------ READ LIST ------------------//
+        [Authorize]
         public IActionResult CrashDetailsList()
         {
             List<Crash> crashes = _context.Crashes.ToList();
@@ -39,7 +41,12 @@ namespace UDOT.Controllers
 
 
 
+
+        //------------------ ADMIN FUNCTIONS ------------------//
+
+
         //------------------ ADD ------------------//
+        [Authorize]
         public IActionResult CreateCrashForm()
         {
             ViewBag.Teams = _context.Crashes.ToList();
@@ -84,54 +91,4 @@ namespace UDOT.Controllers
             return RedirectToAction("CrashDetailsList");
         }
     }
-    //public class AccountController:Controller
-    //{ 
-
-    //    //--- Admin Functionality ---//
-    //    private UserManager<IdentityUser> userManager;
-    //    private SignInManager<IdentityUser> signInManager;
-
-    //    public AccountController(UserManager<IdentityUser> um, SignInManager<IdentityUser> sim)
-    //    {
-    //        userManager = um;
-    //        signInManager = sim;
-    //    }
-
-    //    [HttpGet]
-    //    public IActionResult Login(string returnUrl)
-    //    {
-    //        return View(new LoginModel { ReturnUrl = returnUrl });
-    //    }
-
-    //    [HttpPost]
-    //    public async Task<IActionResult> Login(LoginModel loginModel)
-    //    {
-    //        if (ModelState.IsValid)
-    //        {
-    //            IdentityUser user = await userManager.FindByNameAsync(loginModel.Username);
-
-    //            if (user != null)
-    //            {
-    //                await signInManager.SignOutAsync();
-
-    //                if ((await signInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
-    //                {
-    //                    return Redirect(loginModel?.ReturnUrl ?? "/Admin");
-    //                }
-    //            }
-    //        }
-
-    //        ModelState.AddModelError("", "invalid name or password");
-    //        return View(loginModel);
-    //    }
-
-    //    public async Task<RedirectResult> Logout(string returnUrl = "/")
-    //    {
-    //        await signInManager.SignOutAsync();
-
-    //        return Redirect(returnUrl);
-    //    }
-
-
-    //}
 }
