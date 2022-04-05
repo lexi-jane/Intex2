@@ -67,6 +67,9 @@ namespace UDOT
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    "County", "{countySelect}", new { Controller = "Home", action = "CrashDetailsList" });
+                
                 endpoints.MapDefaultControllerRoute();
 
                 //endpoints.MapControllerRoute(

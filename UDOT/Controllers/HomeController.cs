@@ -33,9 +33,11 @@ namespace UDOT.Controllers
 
         //------------------ READ LIST ------------------//
         [Authorize]
-        public IActionResult CrashDetailsList()
+        public IActionResult CrashDetailsList(string countySelect)
         {
-            List<Crash> crashes = _context.Crashes.ToList();
+            List<Crash> crashes = _context.Crashes
+                .Where(x => x.County_Name == countySelect || countySelect == null)
+                .ToList();
             return View(crashes);
         }
 
