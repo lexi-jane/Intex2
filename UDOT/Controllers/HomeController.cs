@@ -33,9 +33,14 @@ namespace UDOT.Controllers
 
         //------------------ READ LIST ------------------//
         [Authorize]
-        public IActionResult CrashDetailsList()
+        [HttpGet]
+        public IActionResult CrashDetailsList(int severity)
         {
-            List<Crash> crashes = _context.Crashes.ToList();
+            ViewBag.SelectedSeverity = RouteData?.Values["severity"];
+
+            List<Crash> crashes = _context.Crashes
+                .Where(x => x.Crash_Severity_ID == severity)
+                .ToList();
             return View(crashes);
         }
 

@@ -1,0 +1,13 @@
+﻿@{
+}
+
+@model IEnumerable<int>
+
+<div class="d-grid gap-2">
+    <a href="/" class="btn btn-sm">Home</a>
+    
+    @foreach(int s in Model)
+            {
+                <a href="/Home/CrashDetailsList/?severity=@s" class="btn btn-sm">@s</a>
+            }
+</div>

@@ -67,6 +67,10 @@ namespace UDOT
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapControllerRoute("SeverityFilter", "severity{severityType}"
+                //    , new { Controller = "Home", action = "CrashDetailsList" });
+
+
                 endpoints.MapDefaultControllerRoute();
 
                 //endpoints.MapControllerRoute(
