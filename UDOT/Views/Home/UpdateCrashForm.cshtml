@@ -5,7 +5,7 @@
 <br />
 <form method="POST" action="/Home/UpdateCrash">
 
-    <input type="hidden" name="CRASH_ID" value="Model.CRASH_ID"/>
+    <input type="hidden" name="CRASH_ID" value="Model.CRASH_ID" />
 
     <div class="mb-2">
         <label for="meeting-time" class="form-label">Select date and time crash:</label>
@@ -25,18 +25,18 @@
     </div>
     <div class="mb-2">
         <label name="LAT_UM_Y" class="form-label">Latitude:</label>
-        <input type="number" class="form-control" name="LAT_UM_Y"  value="Model.MILEPOINT">
+        <input type="number" class="form-control" name="LAT_UM_Y" value="Model.MILEPOINT">
     </div>
     <div class="mb-2">
         <label name="LONG_UTM_X" class="form-label">Longitude:</label>
-        <input type="number" class="form-control" name="LONG_UTM_X"  value="Model.MILEPOINT">
+        <input type="number" class="form-control" name="LONG_UTM_X" value="Model.MILEPOINT">
     </div>
 
 
     @*LOOP Main Road DROPDOWN?*@
     <div class="mb-2">
         <label name="MAIN_ROAD_NAME" class="form-label">Main Road:</label>
-        <input type="text" class="form-control" name="MAIN_ROAD_NAME"  value="Model.MILEPOINT">
+        <input type="text" class="form-control" name="MAIN_ROAD_NAME" value="Model.MILEPOINT">
     </div>
 
     @*LOOP CITY DROPDOWN*@
