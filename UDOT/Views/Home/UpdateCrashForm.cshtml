@@ -3,6 +3,8 @@
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
+@*We need to create the ability to Update the Crash Form with passing in the correct data!*@
+
 <h2>Add Vehicle Crash</h2>
 <h5>Fill out crash information below:</h5>
 <br />
@@ -14,9 +16,10 @@
         <label for="meeting-time" class="form-label">Select date and time crash:</label>
         <br />
         <input type="datetime-local" id="Crash_Datetime" class="form-control"
-               name="Crash_Datetime" value="@Model.Crash_Datetime"
+               name="Crash_Datetime" value="@Model.Crash_Date"
                min="2018-06-07T00:00" max="2018-06-14T00:00">
     </div>
+    @*Need to add something for the Model Crash Time*@
     <div class="mb-2">
         <label name="Route" class="form-label">Route No:</label>
         <input type="number" class="form-control" name="Route" min="0" value="@Model.Route">
@@ -151,11 +154,11 @@
     </div>
     <div class="mb-2">
         <label name="Distracted_Driver" class="form-label">Distracted Driving</label>
-        <input type="checkbox" id="Distracted_Driver" name="Distracted_Driver" value="@Model.Distracted_Driving">
+        <input type="checkbox" id="Distracted_Driver" name="Distracted_Driver" value="@Model.Distracted_Driver">
     </div>
     <div class="mb-2">
         <label name="Drowsy_Driver" class="form-label">Drowsy Driving</label>
-        <input type="checkbox" id="Drowsy_Driver" name="Drowsy_Driver" value="@Model.Drowsy_Driving">
+        <input type="checkbox" id="Drowsy_Driver" name="Drowsy_Driver" value="@Model.Drowsy_Driver">
     </div>
     <div class="mb-2">
         <label name="Roadway_Departure" class="form-label">Roadway Departure</label>
