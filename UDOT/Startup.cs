@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,12 +16,13 @@ namespace UDOT
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -33,14 +34,15 @@ namespace UDOT
                 options.UseMySql(Configuration["ConnectionStrings:CrashDbConnection"]);
             });
 
-            services.AddScoped<ICrashRepository, EFCrashRepository>();
-
             services.AddDbContext<AppIdentityDbContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionStrings:IdentityConnection"]);
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>();
+
+            services.AddScoped<ICrashRepository, EFCrashRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,15 +52,9 @@ namespace UDOT
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
 
@@ -70,6 +66,19 @@ namespace UDOT
                 endpoints.MapControllerRoute(
                     "County", "{countySelect}", new { Controller = "Home", action = "CrashDetailsList" });
                 
+                endpoints.MapControllerRoute("typepage",
+                    "{crashDate}/Page{pageNum}",
+                    new { Controller = "Home", action = "CrashDetailsList" });
+
+                endpoints.MapControllerRoute(
+                    "Paging",
+                    "Page{pageNum}",
+                    new { Controller = "Home", action = "CrashDetailsList", pageNum = 1 });
+
+                endpoints.MapControllerRoute("type",
+                   "{crashDate}",
+                   new { Controller = "Home", action = "CrashDetailsList", pageNum = 1 });
+
                 endpoints.MapDefaultControllerRoute();
 
                 //endpoints.MapControllerRoute(

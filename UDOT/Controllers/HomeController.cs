@@ -32,22 +32,50 @@ namespace UDOT.Controllers
 
 
         //------------------ READ LIST ------------------//
+        //[Authorize]
+        //public IActionResult CrashDetailsList()
+        //{
+        //    List<Crash> crashes = _context.Crashes.ToList();
+        //    return View(crashes);
+        //}
+
+        //~~~~~~~~~~~~~~~ PAGINATION ~~~~~~~~~~~~~~~//
         [Authorize]
-        public IActionResult CrashDetailsList(string countySelect)
+        public IActionResult CrashDetailsList(int pageNum = 1)
+        //public IActionResult CrashDetailsList(DateTime crashDate, int pageNum = 1)
+
         {
-            List<Crash> crashes = _context.Crashes
-                .Where(x => x.County_Name == countySelect || countySelect == null)
-                .ToList();
-            return View(crashes);
+            int pageSize = 3;
+
+            var x = new CrashesViewModel
+            {
+                Crashes = _context.Crashes
+                //.Where(p => p.Crash_Date == crashDate || crashDate == null)
+                .OrderBy(p => p.Crash_Date)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    //TotalNumCrashes =
+                    //(crashDate == null ? _context.Crashes.Count()
+                    //: _context.Crashes.Where(p => p.Crash_Date == crashDate).Count()),
+                    TotalNumCrashes = _context.Crashes.Count(),
+                    CrashesPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+
+            return View(x);
         }
 
 
 
 
-        //------------------ ADMIN FUNCTIONS ------------------//
+        //~~~~~~~~~~~~~~~ ADMIN FUNCTIONS ~~~~~~~~~~~~~~~//
 
 
-        //------------------ ADD ------------------//
+        //------------------ Add ------------------//
         [Authorize]
         public IActionResult CreateCrashForm()
         {
@@ -58,14 +86,12 @@ namespace UDOT.Controllers
         [HttpPost]
         public IActionResult CreateCrash([FromForm] Crash crash)
         {
-            int newCrashID = _context.Crashes.OrderBy(x => x.CRASH_ID).Last().CRASH_ID;
-            crash.CRASH_ID = newCrashID + 1;
             _context.Add(crash);
             _context.SaveChanges();
             return RedirectToAction("CrashDetailsList");
         }
 
-        //------------------ EDIT(UPDATE) ------------------//
+        //------------------ Edit/Update ------------------//
         [Authorize]
         [HttpGet]
         [Route("/Home/UpdateCrashForm/{id}")]
@@ -79,12 +105,14 @@ namespace UDOT.Controllers
         [HttpPost]
         public IActionResult UpdateCrash([FromForm] Crash crash)
         {
+            int newCrashID = _context.Crashes.OrderBy(x => x.CRASH_ID).Last().CRASH_ID;
+            crash.CRASH_ID = newCrashID + 1;
             _context.Update(crash);
             _context.SaveChanges();
             return RedirectToAction("CrashDetailsList");
         }
 
-        //---------------- Delete -------------------------//
+        //---------------- Delete -----------------//
         [Authorize]
         [Route("/Home/DeleteCrash/{id}")]
         public IActionResult DeleteCrash(int id)
@@ -94,5 +122,10 @@ namespace UDOT.Controllers
             _context.SaveChanges();
             return RedirectToAction("CrashDetailsList");
         }
+
+
+
+       
+
     }
 }

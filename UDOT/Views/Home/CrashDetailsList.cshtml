@@ -5,12 +5,18 @@
 @using Microsoft.AspNetCore.Authorization
 @attribute [Authorize]
 
-@model List<Crash>
+@model CrashesViewModel
 
-<div class="row m-1 p-1">
+<div page-blah="@Model.PageInfo" page-action="Index" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary" class="btn-group pull-right m-1">
+</div>
+
+
+<div class="">
 
     @*put filters here*@
-    <div id="types" class="col-2"> 
+    <div id="types" class="col-2">
         <p>Utah</p>
         <p>Utah</p>
         <p>Utah</p>
@@ -26,6 +32,9 @@
             <a href="/Account/Logout" class="btn btn-success">Logout</a>
         </div>
 
+        <div>
+
+        </div>
         <table class="table table-sm table-striped table-bordered table-hover">
             <thead>
                 <tr>
@@ -41,14 +50,14 @@
                     <th>County</th>
                     <th>Crash Severity</th>
                     <th>Tags</th>
-                    
+
 
 
                 </tr>
             </thead>
             <tbody>
-                @foreach(Crash c in Model)
-                { 
+                @foreach (Crash c in Model.Crashes)
+                {
                     <tr>
                         <td>@c.CRASH_ID</td>
                         <td>@c.Crash_Date.ToShortDateString() </td>
@@ -154,8 +163,6 @@
                     </tr>
                 }
             </tbody>
-
-
         </table>
 
     </div>
