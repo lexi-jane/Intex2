@@ -42,10 +42,10 @@ namespace UDOT.Controllers
 
 
 
-        //------------------ ADMIN FUNCTIONS ------------------//
+        //~~~~~~~~~~~~~~~ ADMIN FUNCTIONS ~~~~~~~~~~~~~~~//
 
 
-        //------------------ ADD ------------------//
+        //------------------ Add ------------------//
         [Authorize]
         public IActionResult CreateCrashForm()
         {
@@ -61,7 +61,7 @@ namespace UDOT.Controllers
             return RedirectToAction("CrashDetailsList");
         }
 
-        //------------------ EDIT(UPDATE) ------------------//
+        //------------------ Edit/Update ------------------//
         [Authorize]
         [HttpGet]
         [Route("/Home/UpdateCrashForm/{id}")]
@@ -80,7 +80,7 @@ namespace UDOT.Controllers
             return RedirectToAction("CrashDetailsList");
         }
 
-        //---------------- Delete -------------------------//
+        //---------------- Delete -----------------//
         [Authorize]
         [Route("/Home/DeleteCrash/{id}")]
         public IActionResult DeleteCrash(string id)
@@ -90,5 +90,35 @@ namespace UDOT.Controllers
             _context.SaveChanges();
             return RedirectToAction("CrashDetailsList");
         }
+
+
+
+        //~~~~~~~~~~~~~~~ PAGINATION ~~~~~~~~~~~~~~~//
+
+        public IActionResult Index(string crashDate, int pageNum = 1)
+        {
+            int pageSize = 10;
+
+            var y = new CrashesViewModel
+            {
+                crashes = _context.Crashes
+                .Where(x => x.Crash_Datetime == crashDate || crashDate == null)
+                .OrderBy(x => x.Crash_Datetime)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumCrashes =
+                    (crashDate == null ? _context.Crashes.Count()
+                    : _context.Crashes.Where(x => x.Crash_Datetime == crashDate).Count()),
+                    CrashesPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+
+            return View(y);
+        }
+
     }
 }
