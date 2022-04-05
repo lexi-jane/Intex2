@@ -10,13 +10,13 @@
 <div class="row m-1 p-1">
 
     @*put filters here*@
-    <div id="types" class="col-3"> 
+    <div id="types" class="col-2"> 
         <p>Utah</p>
         <p>Utah</p>
         <p>Utah</p>
     </div>
 
-    <div class="col-9">
+    <div class="col-10">
         <div class="text-center">
             <h1 class="display-4">Utah Vehicle Crash Information</h1>
         </div>
@@ -30,8 +30,7 @@
             <thead>
                 <tr>
                     <th>Crash ID</th>
-                    <th>Date</th>
-                    <th>Time</th>
+                    <th>Date and Time</th>
                     <th>Route No</th>
                     <th>Milepoint</th>
                     <th>Latitude</th>
@@ -50,31 +49,105 @@
                 @foreach(Crash c in Model)
                 { 
                     <tr>
+                        <td>@c.CRASH_ID</td>
+                        <td>@c.Crash_Datetime </td>
+                        <td>@c.Crash_Datetime</td>
+                        <td>@c.Milepoint</td>
+                        <td>@c.Lat_Utm_Y</td>
+                        <td>@c.Long_Utm_X</td>
+                        <td>@c.Main_Road_Name</td>
                         <td>@c.City</td>
-                        <td>2019 Dec 23</td>
-                        <td>2:07:00 PM</td>
-                        <td>3418</td>
-                        <td>0.181</td>
-                        <td>4,563,644.088</td>
-                        <td>414,323.3686</td>
-                        <td>1741 W 2550 S; WELLS CARGO TRAILER</td>
-                        <td>OGDEN</td>
-                        <td>WEBER</td>
-                        <td>1</td>
+                        <td>@c.County_Name</td>
+                        <td>@c.Crash_Severity_ID</td>
 
                         <td>
-                            <span class="badge rounded-pill bg-primary text-light">Unrestrained</span>
-                            <span class="badge rounded-pill bg-primary text-light">Teenage Driver Involved</span>
+                            @if (@c.Work_Zone_Related == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Work_Zone_Related</span>
+                            }
+                            @if (@c.Pedestrian_Involved == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Pedestrian_Involved</span>
+                            }
+                            @if (@c.Bicyclist_Involved == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Bicyclist_Involved</span>
+                            }
+                            @if (@c.Motorcycle_Involved == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Motorcycle_Involved</span>
+                            }
+                            @if (@c.Improper_Restraint == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Improper_Restraint</span>
+                            }
+                            @if (@c.Unrestrained == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Unrestrained</span>
+                            }
+                            @if (@c.DUI == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">DUI</span>
+                            }
+                            @if (@c.Intersection_Related == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Intersection_Related</span>
+                            }
+                            @if (@c.Wild_Animal_Related == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Wild_Animal_Related</span>
+                            }
+                            @if (@c.Domestic_Animal_Related == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Domestic_Animal_Related</span>
+                            }
+                            @if (@c.Overturn_Rollover == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Overturn_Rollover</span>
+                            }
+                            @if (@c.Commercial_Motor_VEH_Involved == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Commercial_Motor_VEH_Involved</span>
+                            }
+                            @if (@c.Teenage_Driver_Involved == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Teenage_Driver_Involved</span>
+                            }
+                            @if (@c.Older_Driver_Involved == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Older_Driver_Involved</span>
+                            }
+                            @if (@c.Night_Dark_Condition == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Night_Dark_Condition</span>
+                            }
+                            @if (@c.Single_Vehicle == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Single_Vehicle</span>
+                            }
+                            @if (@c.Distracted_Driving == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Distracted_Driving</span>
+                            }
+                            @if (@c.Drowsy_Driving == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Drowsy_Driving</span>
+                            }
+                            @if (@c.Roadway_Departure == "true")
+                            {
+                                <span class="badge rounded-pill bg-primary text-light">Roadway_Departure</span>
+                            }
+
 
                         </td>
 
                         <td>
                             @*insert ID parameter*@
-                            <a class="btn btn-warning btn-sm" href="/Home/UpdateCrashForm/">Edit</a>
+                            <a class="btn btn-warning btn-sm" href="/Home/UpdateCrashForm/@c.CRASH_ID">Edit</a>
                         </td>
                         <td>
                             @*insert ID parameter*@
-                            <a class="btn btn-danger btn-sm" href="/Home/DeleteCrash/">Delete</a>
+                            <a class="btn btn-danger btn-sm" href="/Home/DeleteCrash/@c.CRASH_ID">Delete</a>
                         </td>
                     </tr>
                 }
