@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using UDOT.Models;
 
@@ -11,12 +12,13 @@ namespace UDOT.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private CrashDbContext _context { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(CrashDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
+
 
         public IActionResult Index()
         {
@@ -28,7 +30,11 @@ namespace UDOT.Controllers
 
         public IActionResult CrashDetailsList()
         {
-            return View();
+            <List>Crash crashes;
+            crashes = _context.Crashes
+                   .OrderBy(c => c.Crash_Datetime)
+                   .ToList();
+            return View(crashes);
         }
 
 
@@ -52,7 +58,7 @@ namespace UDOT.Controllers
         [HttpGet]
         public IActionResult UpdateCrashForm()
         {
-            //ViewBag.Teams = _context.Teams.ToList();
+            ViewBag.Teams = _context.Teams.ToList();
             //Crash c = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
             return View();
         }
