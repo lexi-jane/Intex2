@@ -1,0 +1,10 @@
+﻿@{
+}
+
+@model IEnumerable<string>
+
+<a asp-controller="Home" asp-action="Index">Home</a>
+@foreach (string c in Model)
+            {
+                <a asp-controller="Home" asp-action="CrashDetailsList" asp-route-countySelect="@c">@c</a>
+            }
