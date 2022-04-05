@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using UDOT.Models;
 using UDOT.Models.ViewModels;
@@ -14,114 +15,80 @@ namespace UDOT.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private CrashDbContext _context { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(CrashDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        [Authorize]
+
+        //------------------ Landing Page ------------------//
         public IActionResult Index()
         {
             return View();
         }
 
 
-        //------------------ READ LIST ------------------//
 
-        
+        //------------------ READ LIST ------------------//
+        [Authorize]
         public IActionResult CrashDetailsList()
         {
-            return View();
+            List<Crash> crashes = _context.Crashes.ToList();
+            return View(crashes);
         }
 
 
 
+
+        //------------------ ADMIN FUNCTIONS ------------------//
+
+
         //------------------ ADD ------------------//
         [Authorize]
-        [HttpGet]
         public IActionResult CreateCrashForm()
         {
+            ViewBag.Teams = _context.Crashes.ToList();
             return View();
         }
 
         [HttpPost]
         public IActionResult CreateCrash([FromForm] Crash crash)
         {
+            _context.Add(crash);
+            _context.SaveChanges();
             return RedirectToAction("CrashDetailsList");
         }
-
-
 
         //------------------ EDIT(UPDATE) ------------------//
         [Authorize]
         [HttpGet]
-        public IActionResult UpdateCrashForm()
+        [Route("/Home/UpdateCrashForm/{id}")]
+        public IActionResult UpdateCrashForm(int id)
         {
-            //ViewBag.Teams = _context.Teams.ToList();
-            //Crash c = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
-            return View();
+            ViewBag.Crashes = _context.Crashes.ToList();
+            Crash c = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
+            return View(c);
         }
 
         [HttpPost]
         public IActionResult UpdateCrash([FromForm] Crash crash)
         {
+            _context.Update(crash);
+            _context.SaveChanges();
             return RedirectToAction("CrashDetailsList");
         }
 
         //---------------- Delete -------------------------//
-        //[Authorize]
-        //[HttpGet]
+        [Authorize]
+        [Route("/Home/DeleteCrash/{id}")]
+        public IActionResult DeleteCrash(int id)
+        {
+            Crash c = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
+            _context.Crashes.Remove(c);
+            _context.SaveChanges();
+            return RedirectToAction("CrashDetailsList");
+        }
     }
-    //public class AccountController:Controller
-    //{ 
-
-    //    //--- Admin Functionality ---//
-    //    private UserManager<IdentityUser> userManager;
-    //    private SignInManager<IdentityUser> signInManager;
-
-    //    public AccountController(UserManager<IdentityUser> um, SignInManager<IdentityUser> sim)
-    //    {
-    //        userManager = um;
-    //        signInManager = sim;
-    //    }
-
-    //    [HttpGet]
-    //    public IActionResult Login(string returnUrl)
-    //    {
-    //        return View(new LoginModel { ReturnUrl = returnUrl });
-    //    }
-
-    //    [HttpPost]
-    //    public async Task<IActionResult> Login(LoginModel loginModel)
-    //    {
-    //        if (ModelState.IsValid)
-    //        {
-    //            IdentityUser user = await userManager.FindByNameAsync(loginModel.Username);
-
-    //            if (user != null)
-    //            {
-    //                await signInManager.SignOutAsync();
-
-    //                if ((await signInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
-    //                {
-    //                    return Redirect(loginModel?.ReturnUrl ?? "/Admin");
-    //                }
-    //            }
-    //        }
-
-    //        ModelState.AddModelError("", "invalid name or password");
-    //        return View(loginModel);
-    //    }
-
-    //    public async Task<RedirectResult> Logout(string returnUrl = "/")
-    //    {
-    //        await signInManager.SignOutAsync();
-
-    //        return Redirect(returnUrl);
-    //    }
-
-
-    //}
 }

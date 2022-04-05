@@ -14,6 +14,10 @@ namespace UDOT.Models
         }
 
         public IQueryable<Crash> Crashes => _context.Crashes;
+        public List<Crash> GetCrashes()
+        {
+            return Crashes.ToList();
+        }
 
         public void AddCrash(Crash crash)
         {
