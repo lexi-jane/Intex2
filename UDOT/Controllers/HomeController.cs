@@ -22,7 +22,6 @@ namespace UDOT.Controllers
             _context = context;
         }
 
-        [Authorize]
         public IActionResult Index()
         {
             return View();
@@ -34,50 +33,56 @@ namespace UDOT.Controllers
         
         public IActionResult CrashDetailsList()
         {
-            <List>Crash crashes;
-            crashes = _context.Crashes
-                   .OrderBy(c => c.Crash_Datetime)
-                   .ToList();
+            List<Crash> crashes = _context.Crashes.ToList();
             return View(crashes);
         }
 
 
 
         //------------------ ADD ------------------//
-        [Authorize]
-        [HttpGet]
         public IActionResult CreateCrashForm()
         {
+            ViewBag.Teams = _context.Crashes.ToList();
             return View();
         }
 
         [HttpPost]
         public IActionResult CreateCrash([FromForm] Crash crash)
         {
+            _context.Add(crash);
+            _context.SaveChanges();
             return RedirectToAction("CrashDetailsList");
         }
-
-
 
         //------------------ EDIT(UPDATE) ------------------//
         [Authorize]
         [HttpGet]
-        public IActionResult UpdateCrashForm()
+        [Route("/Home/UpdateCrashForm/{id}")]
+        public IActionResult UpdateCrashForm(int id)
         {
-            ViewBag.Teams = _context.Teams.ToList();
-            //Crash c = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
-            return View();
+            ViewBag.Crashes = _context.Crashes.ToList();
+            Crash c = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
+            return View(c);
         }
 
         [HttpPost]
         public IActionResult UpdateCrash([FromForm] Crash crash)
         {
+            _context.Update(crash);
+            _context.SaveChanges();
             return RedirectToAction("CrashDetailsList");
         }
 
         //---------------- Delete -------------------------//
-        //[Authorize]
-        //[HttpGet]
+        [Authorize]
+        [Route("/Home/DeleteCrash/{id}")]
+        public IActionResult DeleteCrash(int id)
+        {
+            Crash c = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
+            _context.Crashes.Remove(c);
+            _context.SaveChanges();
+            return RedirectToAction("CrashDetailsList");
+        }
     }
     //public class AccountController:Controller
     //{ 
