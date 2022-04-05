@@ -45,7 +45,7 @@ namespace UDOT.Controllers
         //public IActionResult CrashDetailsList(DateTime crashDate, int pageNum = 1)
 
         {
-            int pageSize = 50;
+            int pageSize = 3;
 
             var x = new CrashesViewModel
             {
@@ -105,6 +105,8 @@ namespace UDOT.Controllers
         [HttpPost]
         public IActionResult UpdateCrash([FromForm] Crash crash)
         {
+            int newCrashID = _context.Crashes.OrderBy(x => x.CRASH_ID).Last().CRASH_ID;
+            crash.CRASH_ID = newCrashID + 1;
             _context.Update(crash);
             _context.SaveChanges();
             return RedirectToAction("CrashDetailsList");
