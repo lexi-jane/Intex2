@@ -41,38 +41,42 @@
                     <th>County</th>
                     <th>Crash Severity</th>
                     <th>Tags</th>
+                    
+
+
                 </tr>
             </thead>
-
             <tbody>
-                <tr>
-                    <td>11279400</td>
-                    <td>2019 Dec 23</td>
-                    <td>2:07:00 PM</td>
-                    <td>3418</td>
-                    <td>0.181</td>
-                    <td>4,563,644.088</td>
-                    <td>414,323.3686</td>
-                    <td>1741 W 2550 S; WELLS CARGO TRAILER</td>
-                    <td>OGDEN</td>
-                    <td>WEBER</td>
-                    <td>1</td>
+                @foreach(Crash c in Model)
+                { 
+                    <tr>
+                        <td>@c.City</td>
+                        <td>2019 Dec 23</td>
+                        <td>2:07:00 PM</td>
+                        <td>3418</td>
+                        <td>0.181</td>
+                        <td>4,563,644.088</td>
+                        <td>414,323.3686</td>
+                        <td>1741 W 2550 S; WELLS CARGO TRAILER</td>
+                        <td>OGDEN</td>
+                        <td>WEBER</td>
+                        <td>1</td>
 
-                    <td>
-                        <span class="badge rounded-pill bg-primary text-light">Unrestrained</span>
-                        <span class="badge rounded-pill bg-primary text-light">Teenage Driver Involved</span>
+                        <td>
+                            <span class="badge rounded-pill bg-primary text-light">Unrestrained</span>
+                            <span class="badge rounded-pill bg-primary text-light">Teenage Driver Involved</span>
 
-                    </td>
+                        </td>
 
-                    <td>
-                        @*insert ID parameter*@
-                        <a class="btn btn-warning btn-sm" href="/Home/UpdateCrashForm/">Edit</a>
-                    </td>
-                    <td>
-                        @*insert ID parameter*@
-                        <a class="btn btn-danger btn-sm" href="/Home/DeleteCrash/">Delete</a>
-                    </td>
-                </tr>
+                        <td>
+                            @*insert ID parameter*@
+                            <a class="btn btn-warning btn-sm" href="/Home/UpdateCrashForm/">Edit</a>
+                        </td>
+                        <td>
+                            @*insert ID parameter*@
+                            <a class="btn btn-danger btn-sm" href="/Home/DeleteCrash/">Delete</a>
+                        </td>
+                    </tr>
                 }
             </tbody>
 
