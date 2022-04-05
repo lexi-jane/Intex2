@@ -30,7 +30,8 @@
             <thead>
                 <tr>
                     <th>Crash ID</th>
-                    <th>Date and Time</th>
+                    <th>Date</th>
+                    <th>Time</th>
                     <th>Route No</th>
                     <th>Milepoint</th>
                     <th>Latitude</th>
@@ -50,8 +51,9 @@
                 { 
                     <tr>
                         <td>@c.CRASH_ID</td>
-                        <td>@c.Crash_Datetime </td>
-                        <td>@c.Crash_Datetime</td>
+                        <td>@c.Crash_Date </td>
+                        <td>@c.Crash_Time</td>
+                        <td>@c.Route</td>
                         <td>@c.Milepoint</td>
                         <td>@c.Lat_Utm_Y</td>
                         <td>@c.Long_Utm_X</td>
@@ -61,79 +63,79 @@
                         <td>@c.Crash_Severity_ID</td>
 
                         <td>
-                            @if (@c.Work_Zone_Related == "true")
+                            @if (@c.Work_Zone_Related is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Work_Zone_Related</span>
                             }
-                            @if (@c.Pedestrian_Involved == "true")
+                            @if (@c.Pedestrian_Involved is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Pedestrian_Involved</span>
                             }
-                            @if (@c.Bicyclist_Involved == "true")
+                            @if (@c.Bicyclist_Involved is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Bicyclist_Involved</span>
                             }
-                            @if (@c.Motorcycle_Involved == "true")
+                            @if (@c.Motorcycle_Involved is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Motorcycle_Involved</span>
                             }
-                            @if (@c.Improper_Restraint == "true")
+                            @if (@c.Improper_Restraint is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Improper_Restraint</span>
                             }
-                            @if (@c.Unrestrained == "true")
+                            @if (@c.Unrestrained is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Unrestrained</span>
                             }
-                            @if (@c.DUI == "true")
+                            @if (@c.DUI is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">DUI</span>
                             }
-                            @if (@c.Intersection_Related == "true")
+                            @if (@c.Intersection_Related is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Intersection_Related</span>
                             }
-                            @if (@c.Wild_Animal_Related == "true")
+                            @if (@c.Wild_Animal_Related is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Wild_Animal_Related</span>
                             }
-                            @if (@c.Domestic_Animal_Related == "true")
+                            @if (@c.Domestic_Animal_Related is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Domestic_Animal_Related</span>
                             }
-                            @if (@c.Overturn_Rollover == "true")
+                            @if (@c.Overturn_Rollover is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Overturn_Rollover</span>
                             }
-                            @if (@c.Commercial_Motor_VEH_Involved == "true")
+                            @if (@c.Commercial_Motor_VEH_Involved is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Commercial_Motor_VEH_Involved</span>
                             }
-                            @if (@c.Teenage_Driver_Involved == "true")
+                            @if (@c.Teenage_Driver_Involved is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Teenage_Driver_Involved</span>
                             }
-                            @if (@c.Older_Driver_Involved == "true")
+                            @if (@c.Older_Driver_Involved is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Older_Driver_Involved</span>
                             }
-                            @if (@c.Night_Dark_Condition == "true")
+                            @if (@c.Night_Dark_Condition is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Night_Dark_Condition</span>
                             }
-                            @if (@c.Single_Vehicle == "true")
+                            @if (@c.Single_Vehicle is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Single_Vehicle</span>
                             }
-                            @if (@c.Distracted_Driving == "true")
+                            @if (@c.Distracted_Driver is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Distracted_Driving</span>
                             }
-                            @if (@c.Drowsy_Driving == "true")
+                            @if (@c.Drowsy_Driver is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Drowsy_Driving</span>
                             }
-                            @if (@c.Roadway_Departure == "true")
+                            @if (@c.Roadway_Departure is true)
                             {
                                 <span class="badge rounded-pill bg-primary text-light">Roadway_Departure</span>
                             }
