@@ -41,7 +41,7 @@ namespace UDOT.Controllers
 
         //~~~~~~~~~~~~~~~ PAGINATION ~~~~~~~~~~~~~~~//
         [Authorize]
-        public IActionResult CrashDetailsList(int pageNum = 1)
+        public IActionResult CrashDetailsList(string countySelect, int pageNum = 1)
         //public IActionResult CrashDetailsList(DateTime crashDate, int pageNum = 1)
 
         {
@@ -50,17 +50,17 @@ namespace UDOT.Controllers
             var x = new CrashesViewModel
             {
                 Crashes = _context.Crashes
-                //.Where(p => p.Crash_Date == crashDate || crashDate == null)
-                .OrderBy(p => p.Crash_Date)
+                .Where(p => p.County_Name == countySelect || countySelect == null)
+                .OrderBy(p => p.County_Name)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
 
                 PageInfo = new PageInfo
                 {
-                    //TotalNumCrashes =
-                    //(crashDate == null ? _context.Crashes.Count()
-                    //: _context.Crashes.Where(p => p.Crash_Date == crashDate).Count()),
-                    TotalNumCrashes = _context.Crashes.Count(),
+                    TotalNumCrashes =
+                    (countySelect == null ? _context.Crashes.Count()
+                    : _context.Crashes.Where(p => p.County_Name == countySelect).Count()),
+                    //TotalNumCrashes = _context.Crashes.Count(),
                     CrashesPerPage = pageSize,
                     CurrentPage = pageNum
                 }

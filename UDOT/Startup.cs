@@ -63,18 +63,18 @@ namespace UDOT
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    "County", "{countySelect}", new { Controller = "Home", action = "CrashDetailsList" });
-                
-                endpoints.MapControllerRoute("typepage",
-                    "{crashDate}/Page{pageNum}",
-                    new { Controller = "Home", action = "CrashDetailsList" });
+                endpoints.MapControllerRoute("countypage",
+                "{countySelect}/Page{pageNum}",
+                new { Controller = "Home", action = "CrashDetailsList" });
 
                 endpoints.MapControllerRoute(
                     "Paging",
                     "Page{pageNum}",
                     new { Controller = "Home", action = "CrashDetailsList", pageNum = 1 });
 
+                endpoints.MapControllerRoute(
+                    "County", "{countySelect}", new { Controller = "Home", action = "CrashDetailsList" });
+                
                 endpoints.MapControllerRoute("type",
                    "{crashDate}",
                    new { Controller = "Home", action = "CrashDetailsList", pageNum = 1 });
