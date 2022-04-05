@@ -11,7 +11,7 @@ namespace UDOT.Infrastructure
 
     [HtmlTargetElement("div", Attributes = "page-blah")]
     public class PaginationTagHelper: TagHelper
-    {
+    { 
         //dynamically creates page links
         private IUrlHelperFactory uhf;
 

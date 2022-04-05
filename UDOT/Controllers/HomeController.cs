@@ -32,11 +32,41 @@ namespace UDOT.Controllers
 
 
         //------------------ READ LIST ------------------//
+        //[Authorize]
+        //public IActionResult CrashDetailsList()
+        //{
+        //    List<Crash> crashes = _context.Crashes.ToList();
+        //    return View(crashes);
+        //}
+
+        //~~~~~~~~~~~~~~~ PAGINATION ~~~~~~~~~~~~~~~//
         [Authorize]
-        public IActionResult CrashDetailsList()
+        public IActionResult CrashDetailsList(int pageNum = 1)
+        //public IActionResult CrashDetailsList(DateTime crashDate, int pageNum = 1)
+
         {
-            List<Crash> crashes = _context.Crashes.ToList();
-            return View(crashes);
+            int pageSize = 50;
+
+            var x = new CrashesViewModel
+            {
+                Crashes = _context.Crashes
+                //.Where(p => p.Crash_Date == crashDate || crashDate == null)
+                .OrderBy(p => p.Crash_Date)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    //TotalNumCrashes =
+                    //(crashDate == null ? _context.Crashes.Count()
+                    //: _context.Crashes.Where(p => p.Crash_Date == crashDate).Count()),
+                    TotalNumCrashes = _context.Crashes.Count(),
+                    CrashesPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+
+            return View(x);
         }
 
 
@@ -56,8 +86,6 @@ namespace UDOT.Controllers
         [HttpPost]
         public IActionResult CreateCrash([FromForm] Crash crash)
         {
-            int newCrashID = _context.Crashes.OrderBy(x => x.CRASH_ID).Last().CRASH_ID;
-            crash.CRASH_ID = newCrashID + 1;
             _context.Add(crash);
             _context.SaveChanges();
             return RedirectToAction("CrashDetailsList");
@@ -95,32 +123,7 @@ namespace UDOT.Controllers
 
 
 
-        //~~~~~~~~~~~~~~~ PAGINATION ~~~~~~~~~~~~~~~//
-
-        public IActionResult Index(string crashDate, int pageNum = 1)
-        {
-            int pageSize = 10;
-
-            var y = new CrashesViewModel
-            {
-                crashes = _context.Crashes
-                .Where(x => x.Crash_Datetime == crashDate || crashDate == null)
-                .OrderBy(x => x.Crash_Datetime)
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize),
-
-                PageInfo = new PageInfo
-                {
-                    TotalNumCrashes =
-                    (crashDate == null ? _context.Crashes.Count()
-                    : _context.Crashes.Where(x => x.Crash_Datetime == crashDate).Count()),
-                    CrashesPerPage = pageSize,
-                    CurrentPage = pageNum
-                }
-            };
-
-            return View(y);
-        }
+       
 
     }
 }
