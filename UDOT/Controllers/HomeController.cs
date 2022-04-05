@@ -36,7 +36,7 @@ namespace UDOT.Controllers
         public IActionResult CrashDetailsList(string countySelect)
         {
             List<Crash> crashes = _context.Crashes
-                .Where(x => x.County_Name == countySelect)
+                .Where(x => x.County_Name == countySelect || countySelect == null)
                 .ToList();
             return View(crashes);
         }

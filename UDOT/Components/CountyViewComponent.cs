@@ -18,6 +18,8 @@ namespace UDOT.Components
 
         public IViewComponentResult Invoke()
         {
+            ViewBag.SelectedCounty = RouteData?.Values["countySelect"];
+            
             var county = _context.Crashes.Select(x => x.County_Name).Distinct().OrderBy(x => x);
 
 
