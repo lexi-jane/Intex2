@@ -70,7 +70,7 @@ namespace UDOT.Controllers
         //public IActionResult CrashDetailsList(DateTime crashDate, int pageNum = 1)
 
         {
-            int pageSize = 50;
+            int pageSize = 10;
 
             var x = new CrashesViewModel
             {
