@@ -2,9 +2,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
-
 @model CrashesViewModel
 
 <div class="row m-1 p-1">
@@ -16,11 +13,6 @@
     <div class="col-11">
         <div class="text-center">
             <h1 class="display-4">Utah Vehicle Crash Information</h1>
-        </div>
-
-        <div>
-            <a href="/Home/CreateCrashForm" class="btn btn-success">Add Crash</a>
-            <a href="/Account/Logout" class="btn btn-success">Logout</a>
         </div>
 
 
@@ -141,14 +133,7 @@
 
                         </td>
 
-                        <td>
-                            @*insert ID parameter*@
-                            <a class="btn btn-warning btn-sm" href="/Home/UpdateCrashForm/@c.CRASH_ID">Edit</a>
-                        </td>
-                        <td>
-                            @*insert ID parameter*@
-                            <a class="btn btn-danger btn-sm" href="/Home/DeleteCrash/@c.CRASH_ID">Delete</a>
-                        </td>
+                        
                     </tr>
                 }
             </tbody>
@@ -157,9 +142,7 @@
     </div>
 </div>
 
-<div page-blah="@Model.PageInfo" page-action="CrashDetailsList" page-classes-enabled="true"
+<div page-blah="@Model.PageInfo" page-action="AllList" page-classes-enabled="true"
      page-class="btn" page-class-normal="btn-outline-dark"
      page-class-selected="btn-primary" class="btn-group pull-right m-1">
 </div>
-
-

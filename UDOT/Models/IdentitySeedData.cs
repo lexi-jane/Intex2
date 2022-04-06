@@ -14,6 +14,9 @@ namespace UDOT.Models
         private const string adminUser = "group37";
         private const string adminPassword = "SecurePasswordFor37!";
 
+        private const string adminUserMFA = "MFAgroup37";
+        private const string adminPasswordMFA = "MFASecurePasswordFor37!";
+
         public static async void EnsurePopulated(IApplicationBuilder app)
         {
             AppIdentityDbContext _context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<AppIdentityDbContext>();
@@ -28,6 +31,8 @@ namespace UDOT.Models
 
             IdentityUser user = await userManager.FindByIdAsync(adminUser);
 
+            IdentityUser user2 = await userManager.FindByIdAsync(adminUserMFA);
+
             if (user== null)
             {
                 user = new IdentityUser(adminUser);
@@ -36,7 +41,23 @@ namespace UDOT.Models
                 user.PhoneNumber = "555-1234";
 
                 await userManager.CreateAsync(user, adminPassword);
+
+                
+
             }
+
+            if (user2 == null)
+            {
+                user2 = new IdentityUser(adminUserMFA);
+                user2.Email = "group37wells@gmail.com";
+                user2.PhoneNumber = "425-628-1716";
+
+                await userManager.CreateAsync(user2, adminPasswordMFA);
+
+
+
+            }
+
         }
     }
 }

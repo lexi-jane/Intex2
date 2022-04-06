@@ -31,13 +31,34 @@ namespace UDOT.Controllers
 
 
 
-        //------------------ READ LIST ------------------//
-        //[Authorize]
-        //public IActionResult CrashDetailsList()
-        //{
-        //    List<Crash> crashes = _context.Crashes.ToList();
-        //    return View(crashes);
-        //}
+        //------------------ READ LIST For Everyone ------------------//
+        public IActionResult AllList(string countySelect, int pageNum = 1)
+        //public IActionResult CrashDetailsList(DateTime crashDate, int pageNum = 1)
+
+        {
+            int pageSize = 50;
+
+            var x = new CrashesViewModel
+            {
+                Crashes = _context.Crashes
+                .Where(p => p.County_Name == countySelect || countySelect == null)
+                .OrderBy(p => p.County_Name)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumCrashes =
+                    (countySelect == null ? _context.Crashes.Count()
+                    : _context.Crashes.Where(p => p.County_Name == countySelect).Count()),
+                    //TotalNumCrashes = _context.Crashes.Count(),
+                    CrashesPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+
+            return View(x);
+        }
 
         //~~~~~~~~~~~~~~~ PAGINATION ~~~~~~~~~~~~~~~//
         [Authorize]
@@ -45,7 +66,7 @@ namespace UDOT.Controllers
         //public IActionResult CrashDetailsList(DateTime crashDate, int pageNum = 1)
 
         {
-            int pageSize = 3;
+            int pageSize = 50;
 
             var x = new CrashesViewModel
             {
