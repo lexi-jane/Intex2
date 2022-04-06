@@ -3,8 +3,6 @@
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
-@*Need to create the crash form and link it to the model!*@
-
 <h2>Add Vehicle Crash</h2>
 <h5>Fill out crash information below:</h5>
 <br />
@@ -13,12 +11,17 @@
     <input type="hidden" name="CRASH_ID" />
 
     <div class="mb-2">
-        <label for="meeting-time" class="form-label">Select date and time crash:</label>
-        <br />
-        <input type="datetime-local" id="Crash_Datetime" class="form-control"
-               name="Crash_Datetime" value="2018-06-12T19:30"
-               min="2018-06-07T00:00" max="2018-06-14T00:00">
+        <label for="meeting-time" class="form-label">Select crash date:</label>
+        <input type="date" id="Crash_Date" class="form-control"
+               name="Crash_Date">
     </div>
+    <div class="mb-2">
+        <label for="meeting-time" class="form-label">Select time of crash:</label>
+        <input type="time" id="Crash_Time" class="form-control"
+               name="Crash_Time">
+    </div>
+
+
     <div class="mb-2">
         <label name="Route" class="form-label">Route No:</label>
         <input type="number" class="form-control" name="Route" min="0">
@@ -37,13 +40,12 @@
     </div>
 
 
-    @*LOOP Main Road DROPDOWN?*@
     <div class="mb-2">
         <label name="Main_Road_Name" class="form-label">Main Road:</label>
         <input type="text" class="form-control" name="Main_Road_Name">
     </div>
 
-    @*LOOP CITY DROPDOWN*@
+    @*LIST CITY DROPDOWN*@
     <div class="mb-2">
         <label name="City" class="form-label">City:</label>
         <select id="City" name="City" class="form-control">
@@ -56,7 +58,6 @@
         </select>
     </div>
 
-    @*LOOP COUNTY DROPDOWN*@
     <div class="mb-2">
         <label name="County_Name" class="form-label">County:</label>
         <select id="County_Name" name="County_Name" class="form-control">
@@ -89,9 +90,6 @@
             <option value="Washington">Washington</option>
             <option value="Wayne">Wayne</option>
             <option value="Weber">Weber</option>
-
-
-
         </select>
     </div>
 
@@ -194,3 +192,9 @@
         <button type="submit" class="btn btn-success">Submit</button>
     </div>
 </form>
+
+@section Scripts{
+    <script>
+        document.getElementById('Crash_Date').value = new Date().toDateInputValue();
+    </script>
+}

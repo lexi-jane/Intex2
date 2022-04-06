@@ -86,6 +86,9 @@ namespace UDOT.Controllers
         [HttpPost]
         public IActionResult CreateCrash([FromForm] Crash crash)
         {
+            int newCrashID = _context.Crashes.OrderBy(x => x.CRASH_ID).Last().CRASH_ID;
+            crash.CRASH_ID = newCrashID + 1;
+            crash.Crash_Date = crash.Crash_Date.Date;
             _context.Add(crash);
             _context.SaveChanges();
             return RedirectToAction("CrashDetailsList");
@@ -105,8 +108,7 @@ namespace UDOT.Controllers
         [HttpPost]
         public IActionResult UpdateCrash([FromForm] Crash crash)
         {
-            int newCrashID = _context.Crashes.OrderBy(x => x.CRASH_ID).Last().CRASH_ID;
-            crash.CRASH_ID = newCrashID + 1;
+            crash.Crash_Date = crash.Crash_Date.Date;
             _context.Update(crash);
             _context.SaveChanges();
             return RedirectToAction("CrashDetailsList");
