@@ -35,7 +35,7 @@ namespace UDOT.Controllers
 
 
 
-        //------------------ READ LIST For Everyone ------------------//
+        //------------------ PUBLIC READ LIST ------------------//
         public IActionResult AllList(string countySelect, int pageNum = 1)
         //public IActionResult CrashDetailsList(DateTime crashDate, int pageNum = 1)
 
@@ -64,21 +64,26 @@ namespace UDOT.Controllers
             return View(x);
         }
 
-        //~~~~~~~~~~~~~~~ PAGINATION ~~~~~~~~~~~~~~~//
+
+
+
+        //~~~~~~~~~~~~~~~ ADMIN FUNCTIONS ~~~~~~~~~~~~~~~//
+
+        //------------------ Read List ------------------//
+
         [Authorize]
-        public IActionResult CrashDetailsList(string countySelect, int pageNum = 1)
-        //public IActionResult CrashDetailsList(DateTime crashDate, int pageNum = 1)
+        public IActionResult CrashDetailsList(string countySelect)
 
         {
-            int pageSize = 10;
+            //int pageSize = 10;
 
             var x = new CrashesViewModel
             {
                 Crashes = _context.Crashes
                 .Where(p => p.County_Name == countySelect || countySelect == null)
-                .OrderBy(p => p.County_Name)
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize),
+                .OrderBy(p => p.County_Name),
+                //.Skip((pageNum - 1) * pageSize)
+                //.Take(pageSize),
 
                 PageInfo = new PageInfo
                 {
@@ -86,18 +91,13 @@ namespace UDOT.Controllers
                     (countySelect == null ? _context.Crashes.Count()
                     : _context.Crashes.Where(p => p.County_Name == countySelect).Count()),
                     //TotalNumCrashes = _context.Crashes.Count(),
-                    CrashesPerPage = pageSize,
+                    //CrashesPerPage = pageSize,
                     CurrentPage = pageNum
                 }
             };
 
             return View(x);
         }
-
-
-
-
-        //~~~~~~~~~~~~~~~ ADMIN FUNCTIONS ~~~~~~~~~~~~~~~//
 
 
         //------------------ Add ------------------//
