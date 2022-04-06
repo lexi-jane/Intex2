@@ -47,7 +47,7 @@
     </header>
 
     <div class="container">
-
+        <partial name="_CookieConsentPartial" />
         <main role="main" class="col-12">
             @RenderBody()
         </main>
@@ -58,8 +58,9 @@
             &copy; 2022 - UDOT - <a asp-area="" asp-controller="Home" asp-action="PrivacyPolicy">GDPR Compliant Privacy Policy</a>
         </div>
     </footer>
-    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 
