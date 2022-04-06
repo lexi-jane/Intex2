@@ -33,23 +33,26 @@
         <label name="Milepoint" class="form-label">Milepoint:</label>
         <input type="number" class="form-control" name="Milepoint" value="@Model.Milepoint">
     </div>
+
+    @*include max length*@
     <div class="mb-2">
         <label name="Lat_Utm_Y" class="form-label">Latitude:</label>
         <input type="number" class="form-control" name="Lat_Utm_Y" value="@Model.Lat_Utm_Y">
     </div>
+
+    @*include max length*@
     <div class="mb-2">
         <label name="Long_Utm_X" class="form-label">Longitude:</label>
         <input type="number" class="form-control" name="Long_Utm_X" value="@Model.Long_Utm_X">
     </div>
 
 
-    @*LOOP Main Road DROPDOWN?*@
     <div class="mb-2">
         <label name="Main_Road_Name" class="form-label">Main Road:</label>
         <input type="text" class="form-control" name="Main_Road_Name" value="@Model.Main_Road_Name">
     </div>
 
-    @*LOOP CITY DROPDOWN*@
+    @*FINISH CITY DROPDOWN*@
     <div class="mb-2">
         <label name="City" class="form-label">City:</label>
         <select id="City" name="City" class="form-control" value="@Model.City">
