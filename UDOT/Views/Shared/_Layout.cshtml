@@ -27,6 +27,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CreateCrashForm">Add Crash</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AllList">Data Available For All</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -34,10 +37,8 @@
     </header>
 
     <div class="container">
-        <div id="county" class="col-2">
-            <vc:county></vc:county>
-        </div>
-        <main role="main" class="">
+        
+        <main role="main" class="col-12">
             @RenderBody()
         </main>
     </div>
