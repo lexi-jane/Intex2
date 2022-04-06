@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.ML.OnnxRuntime;
 using UDOT.Models;
 
 namespace UDOT
@@ -54,6 +55,10 @@ namespace UDOT
                 .AddEntityFrameworkStores<AppIdentityDbContext>();
 
             services.AddScoped<ICrashRepository, EFCrashRepository>();
+
+            services.AddSingleton<InferenceSession>(
+                        new InferenceSession("Models/best_reg_model.onnx")
+                                                    );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
