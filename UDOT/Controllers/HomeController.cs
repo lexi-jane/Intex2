@@ -35,67 +35,82 @@ namespace UDOT.Controllers
 
 
 
-        //------------------ READ LIST For Everyone ------------------//
-        public IActionResult AllList(string countySelect, int pageNum = 1)
-        {
-            int pageSize = 50;
+        //------------------ PUBLIC READ LIST ------------------//
+        //public IActionResult AllList(string countySelect1)
 
+        //{
+        //    var x = new CrashesViewModel
+        //    {
+        //        Crashes = _context.Crashes
+        //        .Where(p => p.County_Name == countySelect || countySelect == null)
+        //        .OrderBy(p => p.County_Name),
+        //        //.Skip((pageNum - 1) * pageSize)
+        //        //.Take(pageSize),
+
+        //        PageInfo = new PageInfo
+        //        {
+        //            TotalNumCrashes =
+        //            (countySelect == null ? _context.Crashes.Count()
+        //            : _context.Crashes.Where(p => p.County_Name == countySelect).Count()),
+        //            //TotalNumCrashes = _context.Crashes.Count(),
+        //            //CrashesPerPage = pageSize,
+        //            //CurrentPage = pageNum
+        //        }
+        //    };
+
+        //    return View(x);
+        //}
+
+        public IActionResult AllList()
+
+        {
             var x = new CrashesViewModel
             {
                 Crashes = _context.Crashes
-                .Where(p => p.County_Name == countySelect || countySelect == null)
-                .OrderBy(p => p.County_Name)
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize),
+                .OrderBy(p => p.County_Name),
+                //.Skip((pageNum - 1) * pageSize)
+                //.Take(pageSize),
 
-                PageInfo = new PageInfo
-                {
-                    TotalNumCrashes =
-                    (countySelect == null ? _context.Crashes.Count()
-                    : _context.Crashes.Where(p => p.County_Name == countySelect).Count()),
-                    //TotalNumCrashes = _context.Crashes.Count(),
-                    CrashesPerPage = pageSize,
-                    CurrentPage = pageNum
-                }
             };
 
             return View(x);
         }
 
-        //~~~~~~~~~~~~~~~ PAGINATION ~~~~~~~~~~~~~~~//
-        [Authorize]
-        public IActionResult CrashDetailsList(string countySelect, int pageNum = 1)
-        //public IActionResult CrashDetailsList(DateTime crashDate, int pageNum = 1)
-
-        {
-            int pageSize = 10;
-
-            var x = new CrashesViewModel
-            {
-                Crashes = _context.Crashes
-                .Where(p => p.County_Name == countySelect || countySelect == null)
-                .OrderBy(p => p.County_Name)
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize),
-
-                PageInfo = new PageInfo
-                {
-                    TotalNumCrashes =
-                    (countySelect == null ? _context.Crashes.Count()
-                    : _context.Crashes.Where(p => p.County_Name == countySelect).Count()),
-                    //TotalNumCrashes = _context.Crashes.Count(),
-                    CrashesPerPage = pageSize,
-                    CurrentPage = pageNum
-                }
-            };
-
-            return View(x);
-        }
 
 
 
 
         //~~~~~~~~~~~~~~~ ADMIN FUNCTIONS ~~~~~~~~~~~~~~~//
+
+        //------------------ Read List ------------------//
+
+        [Authorize]
+        public IActionResult CrashDetailsList(string countySelect)
+
+        {
+            //figure out filtering?
+            var x = new CrashesViewModel
+            {
+                Crashes = _context.Crashes
+                .Where(p => p.County_Name == countySelect || countySelect == null)
+                .OrderBy(p => p.County_Name),
+                //.Skip((pageNum - 1) * pageSize)
+                //.Take(pageSize),
+
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumCrashes =
+                    (countySelect == null ? _context.Crashes.Count()
+                    : _context.Crashes.Where(p => p.County_Name == countySelect).Count()),
+                    //TotalNumCrashes = _context.Crashes.Count(),
+                    //CrashesPerPage = pageSize,
+                    //CurrentPage = pageNum //idk
+                }
+            };
+
+            return View(x);
+        }
 
 
         //------------------ Add ------------------//
@@ -143,14 +158,7 @@ namespace UDOT.Controllers
             return RedirectToAction("CrashDetailsList");
         }
 
-        //---------------- Delete Confirmation / Deletion -----------------//
-        [Authorize]
-        [Route("/Home/DeleteConfirmation/{id}")]
-        public IActionResult DeleteConfirmation(int id)
-        {
-            Crash crash = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
-            return View("DeleteConfirmation", crash);
-        }
+        //---------------- Delete -----------------//
         [Authorize]
         [Route("/Home/DeleteCrash/{id}")]
         public IActionResult DeleteCrash(int id)
