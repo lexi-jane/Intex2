@@ -145,7 +145,14 @@ namespace UDOT.Controllers
             return RedirectToAction("CrashDetailsList");
         }
 
-        //---------------- Delete -----------------//
+        //---------------- Delete Confirmation / Deletion -----------------//
+        [Authorize]
+        [Route("/Home/DeleteConfirmation/{id}")]
+        public IActionResult DeleteConfirmation(int id)
+        {
+            Crash crash = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
+            return View("DeleteConfirmation", crash);
+        }
         [Authorize]
         [Route("/Home/DeleteCrash/{id}")]
         public IActionResult DeleteCrash(int id)
