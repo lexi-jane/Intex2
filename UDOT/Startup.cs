@@ -174,6 +174,18 @@ namespace UDOT
             {
                 endpoints.MapControllerRoute("countypage",
                 "{countySelect}/Page{pageNum}",
+                new { Controller = "Home", action = "AllList" });
+
+                endpoints.MapControllerRoute(
+                    "Paging",
+                    "Page{pageNum}",
+                    new { Controller = "Home", action = "AllList", pageNum = 1 });
+
+                endpoints.MapControllerRoute(
+                    "County", "{countySelect}", new { Controller = "Home", action = "AllList" });
+
+                endpoints.MapControllerRoute("countypage",
+                "{countySelect}/Page{pageNum}",
                 new { Controller = "Home", action = "CrashDetailsList" });
 
                 endpoints.MapControllerRoute(
@@ -186,17 +198,7 @@ namespace UDOT
                 
                 //Need to do something with different endpoints or different something for different authorization levels
 
-                endpoints.MapControllerRoute("countypage",
-                "{countySelect}/Page{pageNum}",
-                new { Controller = "Home", action = "AllList" });
 
-                endpoints.MapControllerRoute(
-                    "Paging",
-                    "Page{pageNum}",
-                    new { Controller = "Home", action = "AllList", pageNum = 1 });
-
-                endpoints.MapControllerRoute(
-                    "County", "{countySelect}", new { Controller = "Home", action = "AllList" });
 
                 
 

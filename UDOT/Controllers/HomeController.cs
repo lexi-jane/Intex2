@@ -37,8 +37,6 @@ namespace UDOT.Controllers
 
         //------------------ READ LIST For Everyone ------------------//
         public IActionResult AllList(string countySelect, int pageNum = 1)
-        //public IActionResult CrashDetailsList(DateTime crashDate, int pageNum = 1)
-
         {
             int pageSize = 50;
 
