@@ -10,4 +10,14 @@ namespace UDOT.Models.ViewModels
         //calculates how many pages are needed
         public int TotalPages => (int)Math.Ceiling((double)TotalNumCrashes / CrashesPerPage);
     }
+
+    public class PageInfo2
+    {
+        public int TotalNumCrashes2 { get; set; }
+        public int CrashesPerPage2 { get; set; }
+        public int CurrentPage2 { get; set; }
+
+        //calculates how many pages are needed
+        public int TotalPages2 => (int)Math.Ceiling((double)TotalNumCrashes2 / CrashesPerPage2);
+    }
 }
