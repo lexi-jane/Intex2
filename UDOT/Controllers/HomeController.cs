@@ -147,6 +147,11 @@ namespace UDOT.Controllers
             return RedirectToAction("CrashDetailsList");
         }
 
+        //------------- Privacy Policy -----------//
+        public IActionResult PrivacyPolicy()
+        {
+            return View();
+        }
 
 
        
