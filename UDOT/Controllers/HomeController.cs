@@ -77,9 +77,10 @@ namespace UDOT.Controllers
 
         //------------------ Add ------------------//
         [Authorize]
+        [HttpGet]
         public IActionResult CreateCrashForm()
         {
-            ViewBag.Teams = _context.Crashes.ToList();
+            ViewBag.Crashes = _context.Crashes.ToList();
             return View();
         }
 
