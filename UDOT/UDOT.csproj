@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>4ada5a92-9bbe-402e-87e2-aed7aeb681fe</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +13,7 @@
     <None Remove="Pomelo.EntityFrameworkCore.MySql" />
     <None Remove="Models\" />
     <None Remove="Infrastructure\" />
+    <None Remove="Microsoft.ML.OnnxRuntime" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.2.25" />
@@ -27,6 +29,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.7" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.11.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />
