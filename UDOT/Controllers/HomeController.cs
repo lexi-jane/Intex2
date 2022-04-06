@@ -105,11 +105,10 @@ namespace UDOT.Controllers
         [HttpGet]
         public IActionResult CreateCrashForm()
         {
-            //fix so that only distinct city values are listed
             ViewBag.Crashes = _context.Crashes
-                //.Select(c => c.City)
-                //.Distinct()
-                //.OrderBy(c => c)
+                .Select(c => c.City)
+                .Distinct()
+                .OrderBy(c => c)
                 .ToList();
 
             return View();
