@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -63,21 +63,18 @@ namespace UDOT
 
             app.UseEndpoints(endpoints =>
             {
-<<<<<<< Updated upstream
-=======
-                //endpoints.MapControllerRoute(
-                //    "County", "{countySelect}", new { Controller = "Home", action = "CrashDetailsList" });
-                
->>>>>>> Stashed changes
-                endpoints.MapControllerRoute("typepage",
-                    "{crashDate}/Page{pageNum}",
-                    new { Controller = "Home", action = "CrashDetailsList" });
+                endpoints.MapControllerRoute("countypage",
+                "{countySelect}/Page{pageNum}",
+                new { Controller = "Home", action = "CrashDetailsList" });
 
                 endpoints.MapControllerRoute(
                     "Paging",
                     "Page{pageNum}",
                     new { Controller = "Home", action = "CrashDetailsList", pageNum = 1 });
 
+                endpoints.MapControllerRoute(
+                    "County", "{countySelect}", new { Controller = "Home", action = "CrashDetailsList" });
+                
                 endpoints.MapControllerRoute("type",
                    "{crashDate}",
                    new { Controller = "Home", action = "CrashDetailsList", pageNum = 1 });
