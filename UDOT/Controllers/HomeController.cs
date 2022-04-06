@@ -40,25 +40,13 @@ namespace UDOT.Controllers
         //public IActionResult CrashDetailsList(DateTime crashDate, int pageNum = 1)
 
         {
-            int pageSize = 50;
-
             var x = new CrashesViewModel
             {
                 Crashes = _context.Crashes
-                .Where(p => p.County_Name == countySelect || countySelect == null)
-                .OrderBy(p => p.County_Name)
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize),
+                .OrderBy(p => p.County_Name),
+                //.Skip((pageNum - 1) * pageSize)
+                //.Take(pageSize),
 
-                PageInfo = new PageInfo
-                {
-                    TotalNumCrashes =
-                    (countySelect == null ? _context.Crashes.Count()
-                    : _context.Crashes.Where(p => p.County_Name == countySelect).Count()),
-                    //TotalNumCrashes = _context.Crashes.Count(),
-                    CrashesPerPage = pageSize,
-                    CurrentPage = pageNum
-                }
             };
 
             return View(x);
@@ -75,8 +63,7 @@ namespace UDOT.Controllers
         public IActionResult CrashDetailsList(string countySelect)
 
         {
-            //int pageSize = 10;
-
+            //figure out filtering?
             var x = new CrashesViewModel
             {
                 Crashes = _context.Crashes
@@ -92,7 +79,7 @@ namespace UDOT.Controllers
                     : _context.Crashes.Where(p => p.County_Name == countySelect).Count()),
                     //TotalNumCrashes = _context.Crashes.Count(),
                     //CrashesPerPage = pageSize,
-                    CurrentPage = pageNum
+                    //CurrentPage = pageNum //idk
                 }
             };
 

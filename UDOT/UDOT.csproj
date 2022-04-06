@@ -16,6 +16,7 @@
     <None Remove="Microsoft.ML.OnnxRuntime" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.2.25" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.22">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
