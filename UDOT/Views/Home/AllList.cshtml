@@ -2,9 +2,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
-
 @model CrashesViewModel
 
 <div class="row m-1 p-1">
@@ -16,11 +13,6 @@
     <div class="col-11">
         <div class="text-center">
             <h1 class="display-4">Utah Vehicle Crash Information</h1>
-        </div>
-
-        <div>
-            <a href="/Home/CreateCrashForm" class="btn btn-success">Add Crash</a>
-            <a href="/Account/Logout" class="btn btn-success">Logout</a>
         </div>
 
 
@@ -39,6 +31,9 @@
                     <th>County</th>
                     <th>Crash Severity</th>
                     <th>Tags</th>
+
+
+
                 </tr>
             </thead>
             <tbody>
@@ -60,23 +55,23 @@
                         <td>
                             @if (@c.Work_Zone_Related is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Work Zone Related</span>
+                                <span class="badge rounded-pill bg-primary text-light">Work_Zone_Related</span>
                             }
                             @if (@c.Pedestrian_Involved is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Pedestrian Involved</span>
+                                <span class="badge rounded-pill bg-primary text-light">Pedestrian_Involved</span>
                             }
                             @if (@c.Bicyclist_Involved is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Bicyclist Involved</span>
+                                <span class="badge rounded-pill bg-primary text-light">Bicyclist_Involved</span>
                             }
                             @if (@c.Motorcycle_Involved is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Motorcycle Involved</span>
+                                <span class="badge rounded-pill bg-primary text-light">Motorcycle_Involved</span>
                             }
                             @if (@c.Improper_Restraint is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Improper Restraint</span>
+                                <span class="badge rounded-pill bg-primary text-light">Improper_Restraint</span>
                             }
                             @if (@c.Unrestrained is true)
                             {
@@ -88,79 +83,66 @@
                             }
                             @if (@c.Intersection_Related is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Intersection Related</span>
+                                <span class="badge rounded-pill bg-primary text-light">Intersection_Related</span>
                             }
                             @if (@c.Wild_Animal_Related is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Wild Animal Related</span>
+                                <span class="badge rounded-pill bg-primary text-light">Wild_Animal_Related</span>
                             }
                             @if (@c.Domestic_Animal_Related is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Domestic Animal Related</span>
+                                <span class="badge rounded-pill bg-primary text-light">Domestic_Animal_Related</span>
                             }
                             @if (@c.Overturn_Rollover is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Overturn Rollover</span>
+                                <span class="badge rounded-pill bg-primary text-light">Overturn_Rollover</span>
                             }
                             @if (@c.Commercial_Motor_VEH_Involved is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Commercial Motor Vehicle Involved</span>
+                                <span class="badge rounded-pill bg-primary text-light">Commercial_Motor_VEH_Involved</span>
                             }
                             @if (@c.Teenage_Driver_Involved is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Teenage Driver Involved</span>
+                                <span class="badge rounded-pill bg-primary text-light">Teenage_Driver_Involved</span>
                             }
                             @if (@c.Older_Driver_Involved is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Older Driver Involved</span>
+                                <span class="badge rounded-pill bg-primary text-light">Older_Driver_Involved</span>
                             }
                             @if (@c.Night_Dark_Condition is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Night/Dark Conditions</span>
+                                <span class="badge rounded-pill bg-primary text-light">Night_Dark_Condition</span>
                             }
                             @if (@c.Single_Vehicle is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Single Vehicle</span>
+                                <span class="badge rounded-pill bg-primary text-light">Single_Vehicle</span>
                             }
                             @if (@c.Distracted_Driver is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Distracted Driving</span>
+                                <span class="badge rounded-pill bg-primary text-light">Distracted_Driving</span>
                             }
                             @if (@c.Drowsy_Driver is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Drowsy Driving</span>
+                                <span class="badge rounded-pill bg-primary text-light">Drowsy_Driving</span>
                             }
                             @if (@c.Roadway_Departure is true)
                             {
-                                <span class="badge rounded-pill bg-primary text-light">Roadway Departure</span>
+                                <span class="badge rounded-pill bg-primary text-light">Roadway_Departure</span>
                             }
 
 
                         </td>
 
-                        <td>
-                            @*insert ID parameter*@
-                            <a class="btn btn-warning btn-sm" href="/Home/UpdateCrashForm/@c.CRASH_ID">Edit</a>
-                        </td>
-                        <td>
-                            @*insert ID parameter*@
-                            <a class="btn btn-danger btn-sm" href="/Home/DeleteCrash/@c.CRASH_ID">Delete</a>
-                        </td>
+                        
                     </tr>
                 }
             </tbody>
         </table>
 
-        <div page-blah="@Model.PageInfo" page-action="CrashDetailsList" page-classes-enabled="true"
-             page-class="btn" page-class-normal="btn-outline-dark"
-             page-class-selected="btn-primary" class="btn-group pull-right m-1">
-        </div>
     </div>
 </div>
 
-<div page-blah="@Model.PageInfo" page-action="CrashDetailsList" page-classes-enabled="true"
+<div page-blah="@Model.PageInfo" page-action="AllList" page-classes-enabled="true"
      page-class="btn" page-class-normal="btn-outline-dark"
      page-class-selected="btn-primary" class="btn-group pull-right m-1">
 </div>
-
-

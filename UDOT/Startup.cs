@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.ML.OnnxRuntime;
 using UDOT.Models;
 
 namespace UDOT
@@ -29,6 +30,17 @@ namespace UDOT
         {
             services.AddControllersWithViews();
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Increased the Required Password Length to 10
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 10;
+                options.Password.RequiredUniqueChars = 1;
+            });
+
             services.AddDbContext<CrashDbContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionStrings:CrashDbConnection"]);
@@ -43,6 +55,10 @@ namespace UDOT
                 .AddEntityFrameworkStores<AppIdentityDbContext>();
 
             services.AddScoped<ICrashRepository, EFCrashRepository>();
+
+            services.AddSingleton<InferenceSession>(
+                        new InferenceSession("Models/best_reg_model.onnx")
+                                                    );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,9 +91,21 @@ namespace UDOT
                 endpoints.MapControllerRoute(
                     "County", "{countySelect}", new { Controller = "Home", action = "CrashDetailsList" });
                 
-                endpoints.MapControllerRoute("type",
-                   "{crashDate}",
-                   new { Controller = "Home", action = "CrashDetailsList", pageNum = 1 });
+                //Need to do something with different endpoints or different something for different authorization levels
+
+                endpoints.MapControllerRoute("countypage",
+                "{countySelect}/Page{pageNum}",
+                new { Controller = "Home", action = "AllList" });
+
+                endpoints.MapControllerRoute(
+                    "Paging",
+                    "Page{pageNum}",
+                    new { Controller = "Home", action = "AllList", pageNum = 1 });
+
+                endpoints.MapControllerRoute(
+                    "County", "{countySelect}", new { Controller = "Home", action = "AllList" });
+
+                
 
                 endpoints.MapDefaultControllerRoute();
 

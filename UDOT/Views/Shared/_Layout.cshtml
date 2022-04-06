@@ -27,6 +27,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CreateCrashForm">Add Crash</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AllList">Data Available For All</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Calculator">Predictor</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -34,19 +40,17 @@
     </header>
 
     <div class="container">
-        <div id="county" class="col-2">
-            <vc:county></vc:county>
-        </div>
-        <main role="main" class="">
+        
+        <main role="main" class="col-12">
             @RenderBody()
         </main>
     </div>
 
-    @*<footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - UDOT - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - UDOT - <a asp-area="" asp-controller="Home" asp-action="PrivacyPolicy">GDPR Compliant Privacy Policy</a>
         </div>
-    </footer>*@
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

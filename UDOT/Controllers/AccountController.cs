@@ -54,5 +54,21 @@ namespace UDOT.Controllers
             return Redirect(returnUrl);
         }
 
+        [HttpGet]
+        public IActionResult Registration()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Registration(RegistrationModel registrationModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        IdentityUser 
+        //    }
+        //}
+
+
     }
 }
