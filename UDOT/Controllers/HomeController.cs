@@ -132,6 +132,9 @@ namespace UDOT.Controllers
             return RedirectToAction("CrashDetailsList");
         }
 
+        IQueryable<Crash> Crashes => _context.Crashes;
+
+
         //---------------- Delete -----------------//
         [Authorize]
         [Route("/Home/DeleteCrash/{id}")]
